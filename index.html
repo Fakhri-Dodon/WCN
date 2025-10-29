@@ -17,6 +17,26 @@
             --transition: all 0.3s ease;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --radius: 8px;
+            
+            /* Default light mode colors */
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: white;
+            --header-bg: white;
+            --footer-bg: #1e293b;
+            --footer-text: white;
+            --section-alt-bg: #f1f5f9;
+        }
+
+        /* Dark mode colors */
+        .dark-mode {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --card-bg: #1e293b;
+            --header-bg: #1e293b;
+            --footer-bg: #0f172a;
+            --footer-text: #e2e8f0;
+            --section-alt-bg: #1e293b;
         }
         
         * {
@@ -32,8 +52,9 @@
         
         body {
             line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: var(--transition);
         }
         
         .container {
@@ -112,12 +133,13 @@
         
         /* Header */
         header {
-            background-color: white;
+            background-color: var(--header-bg);
             box-shadow: var(--shadow);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: var(--transition);
         }
         
         .navbar {
@@ -137,6 +159,7 @@
         .nav-links {
             display: flex;
             list-style: none;
+            align-items: center;
         }
         
         .nav-links li {
@@ -145,13 +168,27 @@
         
         .nav-links a {
             text-decoration: none;
-            color: var(--dark);
+            color: var(--text-color);
             font-weight: 500;
             transition: var(--transition);
         }
         
         .nav-links a:hover {
             color: var(--primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            color: var(--primary);
+            transform: rotate(30deg);
         }
         
         .hamburger {
@@ -161,15 +198,36 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            background-image: url('https://i.pinimg.com/736x/38/f2/e4/38f2e4e6e6529b0943676a50bbc8c3f5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
             padding: 150px 0 100px;
             text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
         
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .hero p {
@@ -177,6 +235,7 @@
             max-width: 700px;
             margin: 0 auto 2rem;
             opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         .hero-btns {
@@ -187,8 +246,8 @@
         }
         
         .hero-btns .btn {
-            background-color: white;
-            color: var(--primary);
+            background-color: var(--primary);
+            color: white;
         }
         
         .hero-btns .btn-outline {
@@ -198,7 +257,7 @@
         }
         
         .hero-btns .btn:hover {
-            background-color: var(--light);
+            background-color: var(--primary-dark);
         }
         
         .hero-btns .btn-outline:hover {
@@ -214,7 +273,7 @@
         }
         
         .service-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: var(--radius);
             padding: 30px;
             box-shadow: var(--shadow);
@@ -239,7 +298,7 @@
         
         /* About Section */
         .about {
-            background-color: #f1f5f9;
+            background-color: var(--section-alt-bg);
         }
         
         .about-content {
@@ -305,6 +364,7 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
+            background-color: var(--card-bg);
         }
         
         .portfolio-item:hover {
@@ -322,9 +382,12 @@
             font-size: 3rem;
         }
         
+        .dark-mode .portfolio-img {
+            background-color: #334155;
+        }
+        
         .portfolio-info {
             padding: 20px;
-            background-color: white;
         }
         
         .portfolio-info h3 {
@@ -338,7 +401,7 @@
         
         /* Testimonials */
         .testimonials {
-            background-color: #f1f5f9;
+            background-color: var(--section-alt-bg);
         }
         
         .testimonial-slider {
@@ -347,7 +410,7 @@
         }
         
         .testimonial {
-            background-color: white;
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
@@ -413,7 +476,7 @@
         }
         
         .contact-form {
-            background-color: white;
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
@@ -436,6 +499,12 @@
             border-radius: var(--radius);
             font-size: 1rem;
             transition: var(--transition);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .dark-mode .form-control {
+            border-color: #475569;
         }
         
         .form-control:focus {
@@ -451,9 +520,10 @@
         
         /* Footer */
         footer {
-            background-color: var(--dark);
-            color: white;
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
             padding: 60px 0 30px;
+            transition: var(--transition);
         }
         
         .footer-content {
@@ -556,7 +626,7 @@
                 top: 70px;
                 left: -100%;
                 width: 100%;
-                background-color: white;
+                background-color: var(--header-bg);
                 flex-direction: column;
                 align-items: center;
                 padding: 20px 0;
@@ -574,6 +644,7 @@
             
             .hamburger {
                 display: block;
+                color: var(--text-color);
             }
             
             .hero h1 {
@@ -605,13 +676,18 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">WebCraft Nation</a>
+                <a href="#" class="logo">TechSolutions</a>
                 <ul class="nav-links">
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#services">Layanan</a></li>
                     <li><a href="#about">Tentang</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Kontak</a></li>
+                    <li>
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
                 </ul>
                 <div class="hamburger">
                     <i class="fas fa-bars"></i>
@@ -624,7 +700,7 @@
     <section id="home" class="hero">
         <div class="container">
             <h1>Solusi Digital untuk Bisnis Anda</h1>
-            <p>Kami adalah perusahaan teknologi yang mengkhususkan diri dalam pengembangan website, aplikasi mobile, dan solusi otomatisasi bisnis untuk membantu bisnis Anda tumbuh lebih cepat dan efisien.</p>
+            <p>Kami adalah perusahaan teknologi yang mengkhususkan diri dalam pengembangan website, aplikasi mobile, dan solusi otomatisasi untuk membantu bisnis Anda tumbuh lebih cepat dan efisien.</p>
             <div class="hero-btns">
                 <a href="#services" class="btn">Lihat Layanan</a>
                 <a href="#contact" class="btn btn-outline">Hubungi Kami</a>
@@ -668,9 +744,9 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>Tentang Kami</h2>
-                    <p>TechSolutions didirikan pada tahun 2025 dengan misi untuk membantu bisnis mengadopsi teknologi digital dalam operasional mereka. Dengan tim yang berpengalaman di bidang pengembangan perangkat lunak.</p>
+                    <p>TechSolutions didirikan pada tahun 2015 dengan misi untuk membantu bisnis mengadopsi teknologi digital dalam operasional mereka. Dengan tim yang berpengalaman di bidang pengembangan perangkat lunak, kami telah membantu lebih dari 200 klien dari berbagai industri.</p>
                     <p>Kami percaya bahwa teknologi yang tepat dapat mengubah cara bisnis beroperasi, meningkatkan produktivitas, dan membuka peluang baru untuk pertumbuhan.</p>
-                    <!-- <div class="about-stats">
+                    <div class="about-stats">
                         <div class="stat">
                             <div class="stat-number">200+</div>
                             <div class="stat-text">Proyek Selesai</div>
@@ -683,7 +759,7 @@
                             <div class="stat-number">50+</div>
                             <div class="stat-text">Klien Aktif</div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="about-image">
                     <div style="width:100%;height:300px;background-color:#e2e8f0;display:flex;align-items:center;justify-content:center;color:#64748b;">
@@ -731,7 +807,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <!-- <section class="testimonials">
+    <section class="testimonials">
         <div class="container">
             <h2>Apa Kata Klien Kami</h2>
             <div class="testimonial-slider">
@@ -747,7 +823,7 @@
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -880,6 +956,34 @@
             e.preventDefault();
             alert('Terima kasih! Pesan Anda telah berhasil dikirim. Kami akan menghubungi Anda segera.');
             contactForm.reset();
+        });
+        
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
         });
     </script>
 </body>
